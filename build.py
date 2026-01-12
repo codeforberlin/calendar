@@ -5,7 +5,7 @@ import requests
 
 url = 'https://tools.wmflabs.org/icalendar/wpb.php'
 
-sumamry = 'OK Lab Berlin'
+summary = 'OK Lab Berlin'
 
 out_path = Path('public') / 'ok-lab-berlin.ics'
 out_path.parent.mkdir(exist_ok=True)
@@ -18,7 +18,7 @@ response = requests.get(url)
 
 source = icalendar.Calendar.from_ical(response.content)
 for event in source.walk('VEVENT'):
-    if event.get('SUMMARY') == sumamry:
+    if event.get('SUMMARY') == summary:
         cal.add_component(event)
 
 with open(out_path, 'wb') as f:
